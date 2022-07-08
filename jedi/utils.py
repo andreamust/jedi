@@ -28,8 +28,9 @@ def clean_dataset(dataset_path: Path,
     with open(output_path, 'w') as cleaned:
         writer = csv.writer(cleaned, delimiter=',')
         writer.writerow(['s', 'p', 'o'])
-        with open(dataset_path, 'r') as data:
-            for line in data:
+        with open(dataset_path, 'r') as dataset:
+            data = dataset.readlines()
+            for line in data[:900000]:
                 split_line = line.split('\t')
                 split_line.pop(3)
                 if split_line[2] != '0':
