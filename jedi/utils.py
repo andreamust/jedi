@@ -7,7 +7,7 @@ from pathlib import Path
 from joblib import dump
 
 DATASET = Path('../data/humans.spol')
-CSV_DATASET = Path('../data/cleaned_humans_full.csv')
+CSV_DATASET = 'cleaned_humans_full.csv'
 CLEAN_DATASET = Path('../data/cleaned_humans.spol')
 
 
