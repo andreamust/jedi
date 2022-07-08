@@ -3,6 +3,7 @@
 """
 from collections import defaultdict
 from pathlib import Path
+from utils import CLEAN_DATASET
 
 from joblib import load, dump
 
@@ -38,4 +39,4 @@ def classes_count(dataset_path: Path, save: bool = True):
 if __name__ == '__main__':
     # generate the cleaned dataset
     # clean_dataset(DATASET, CLEAN_DATASET)
-    classes_count(TOY_DATASET)
+    classes_count(Path('../data/properties_objects.joblib'))

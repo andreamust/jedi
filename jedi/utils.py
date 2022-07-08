@@ -7,7 +7,7 @@ from pathlib import Path
 from joblib import dump
 
 DATASET = Path('../humans.spol')
-CSV_DATASET = Path('../data/toy_cleaned_humans.csv')
+CSV_DATASET = Path('../data/cleaned_humans_8k.csv')
 CLEAN_DATASET = Path('../data/cleaned_humans.spol')
 
 
@@ -24,10 +24,11 @@ def clean_dataset(dataset_path: Path, output_path: Path) -> None:
         It save
     """
     with open(output_path, 'w') as cleaned:
-
         writer = csv.writer(cleaned, delimiter=',')
-        with open(dataset_path, 'r') as dataset:
-            for line in dataset:
+        writer.writerow(['s', 'p', 'o'])
+        with open(dataset_path, 'r') as data:
+            dataset = data.readlines()
+            for line in dataset[:20000]:
                 split_line = line.split('\t')
                 split_line.pop(3)
                 if split_line[2] != '0':
