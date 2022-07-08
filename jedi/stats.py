@@ -1,35 +1,41 @@
 """
 
 """
-from pathlib import Path
-from utils import open_dataset
-import joblib
 from collections import defaultdict
+from pathlib import Path
 
-DATASET = Path('../humans.spol')
-CLEAN_DATASET = Path('../data/cleand_humans.spol')
+from joblib import load, dump
+
+TOY_DATASET = Path('../data/toy_properties_object.joblib')
 
 
-def classes_count(dataset_path: joblib):
+def classes_count(dataset_path: Path, save: bool = True):
     """
 
     :param dataset_path:
+    :param save:
     :return:
     """
-    properties_count = defaultdict()
-    objects_count = defaultdict()
+    properties_count = defaultdict(int)
+    objects_count = defaultdict(int)
 
-    print(joblib.load('../data/properties_objects.joblib'))
-    properties, objects = joblib.load('../data/properties_objects.joblib')
+    properties, objects = load(dataset_path)
 
     for p in properties:
         properties_count[p] += 1
     for o in objects:
         objects_count[o] += 1
+
+    if save:
+        dump(properties_count, '../data/properties_count.joblib')
+        dump(objects_count, '../data/objects_count.joblib')
+
+    print(properties_count)
+    print(objects_count)
     return properties_count, objects_count
 
 
 if __name__ == '__main__':
     # generate the cleaned dataset
     # clean_dataset(DATASET, CLEAN_DATASET)
-    classes_count(CLEAN_DATASET)
+    classes_count(TOY_DATASET)
