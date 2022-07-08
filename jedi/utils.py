@@ -7,11 +7,13 @@ from pathlib import Path
 from joblib import dump
 
 DATASET = Path('../humans.spol')
-CSV_DATASET = Path('../data/cleaned_humans_8k.csv')
+CSV_DATASET = Path('../data/cleaned_humans.csv')
 CLEAN_DATASET = Path('../data/cleaned_humans.spol')
 
 
-def clean_dataset(dataset_path: Path, output_path: Path) -> None:
+def clean_dataset(dataset_path: Path,
+                  output_path: Path,
+                  limit: int | None = None) -> None:
     """
     Utility function that takes the original dataset and clean
     it by removing all triples containing literals and removing
@@ -28,7 +30,7 @@ def clean_dataset(dataset_path: Path, output_path: Path) -> None:
         writer.writerow(['s', 'p', 'o'])
         with open(dataset_path, 'r') as data:
             dataset = data.readlines()
-            for line in dataset[:20000]:
+            for line in dataset[:limit]:
                 split_line = line.split('\t')
                 split_line.pop(3)
                 if split_line[2] != '0':
