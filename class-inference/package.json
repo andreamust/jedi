@@ -1,0 +1,15 @@
+{
+  "name": "class-inference",
+  "version": "1.0.0",
+  "description": "Infer an ontology from a Knowledge Graph in `csv`-based triple format.",
+  "main": "app.js",
+  "dependencies": {
+    "csv-reader": "^1.0.9",
+    "fs": "^0.0.1-security"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
