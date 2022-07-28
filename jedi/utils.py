@@ -7,7 +7,6 @@ from pathlib import Path
 from joblib import dump
 
 DATASET = Path('../data/humans.spol')
-CSV_DATASET = 'cleaned_humans_400k.csv'
 CLEAN_DATASET = Path('../data/cleaned_humans.spol')
 
 
@@ -29,8 +28,7 @@ def clean_dataset(dataset_path: Path,
         writer = csv.writer(cleaned, delimiter=',')
         writer.writerow(['s', 'p', 'o'])
         with open(dataset_path, 'r') as dataset:
-            data = dataset.readlines()
-            for line in data[:900000]:
+            for line in data:
                 split_line = line.split('\t')
                 split_line.pop(3)
                 if split_line[2] != '0':
@@ -91,5 +89,5 @@ def process_csv(dataset_path: Path,
 
 
 if __name__ == '__main__':
-    clean_dataset(DATASET, CSV_DATASET)
+    clean_dataset(DATASET, CLEAN_DATASET)
     # process_dataset(CLEAN_DATASET, 'toy_properties_object', size=1000)
