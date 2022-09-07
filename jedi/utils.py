@@ -20,7 +20,6 @@ def clean_dataset(dataset_path: Path,
         The absolute path of the original dataset
     :param output_path: Path
         The absolute path where the cleaned dataset is saved
-    :param limit:
     :return: None
         It save
     """
@@ -28,7 +27,7 @@ def clean_dataset(dataset_path: Path,
         writer = csv.writer(cleaned, delimiter=',')
         writer.writerow(['s', 'p', 'o'])
         with open(dataset_path, 'r') as dataset:
-            for line in data:
+            for line in dataset:
                 split_line = line.split('\t')
                 split_line.pop(3)
                 if split_line[2] != '0':
