@@ -32,5 +32,6 @@ if __name__ == '__main__':
     tree = Node(df)
     # create_mapping(Path('../data/property_mapping.bin'))
     tree.right.print_stats()
-
-    tree.right.print_graph(Digraph())
+    # tree.load_map('../data/humans.spol.rowids')
+    # tree.apply_map()
+    print(tree.right.print_graph(Digraph()))

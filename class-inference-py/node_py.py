@@ -5,6 +5,9 @@ import pickle
 from csv import reader
 
 from graphviz import Digraph
+from joblib import delayed, Parallel
+
+from parallel_utils import parallel_load_map
 
 
 class Node:
@@ -126,20 +129,12 @@ class Node:
             with open(mapping_file, 'r') as read_obj:
                 csv_reader = reader(read_obj, delimiter='\t')
                 i = 0
-                for row in csv_reader:
-                    i += 1
-                    if i % 1000000 == 0:
-                        print(i, "mapping rows processed...")
-                    identifier = int(row[0])
-                    if identifier in self.__df['s'].values:
-                        self.subjects_mapping[identifier] = row[1]
-                        print('found in subjects: ', identifier, ":", row[1])
-                    if identifier in self.__df['o'].values:
-                        self.objects_mapping[identifier] = row[1]
-                        print('found in objects: ', identifier, ":", row[1])
-                    if identifier in self.__df['p'].values:
-                        self.properties_mapping[identifier] = row[1]
-                        print('found in properties: ', identifier, ":", row[1])
+                Parallel(n_jobs=-1)(
+                    delayed(parallel_load_map)(i, row, self.__df,
+                                               self.subjects_mapping,
+                                               self.objects_mapping,
+                                               self.properties_mapping) for row
+                    in csv_reader)
 
     # applies internal mappings to the rows of the internal
     # dataframe - recursively
