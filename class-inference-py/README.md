@@ -8,8 +8,8 @@
 - **Parallelization** of:
   - tree construction (recursive constructor)
   - reading of large mapping files
-- **Inference/Deduction** of:
-  - classes from tree structure
+- From binary tree (Dendrogram) **Inference/Deduction** of:
+  - classes
   - class disjointness
   - identify (non-)/discriminating properties
   - identify and merge identical properties
