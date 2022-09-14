@@ -3,7 +3,7 @@
 ## TODOs
 
 - **RDFlib** to:
-  - fetch labels from wikidata
+  - fetch (Q5) labels (Human) from wikidata
   - fetch supplementary information from linked graphs
 - **Parallelization** of:
   - tree construction (recursive constructor)
