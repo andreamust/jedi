@@ -8,6 +8,7 @@ from graphviz import Digraph
 from joblib import delayed, Parallel
 
 from parallel_utils import parallel_load_map
+from label_map import get_label_from_id
 
 
 class Node:
@@ -89,6 +90,7 @@ class Node:
         print("distinct property count: ", len(self.__properties_unique()))
         print("distinct subject count: ", len(self.__subjects_unique()))
         print("most used property:", self.__most_used_property)
+        print("property label:", get_label_from_id(self.__most_used_property))
         print("======================================================")
 
     # print a graphviz representation of the constructed tree
